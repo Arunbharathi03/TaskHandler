@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card{
+    @apply flex font-semibold text-sm justify-between
+}
+
+.card-desc{
+    @apply select-text w-96 h-16 ml-4
+}
+
+.check-icon{
+    @apply hover:text-green-400 p-2 text-gray-400 text-lg mr-2 
+}
+
+.cardstatus{
+    @apply text-center
+}
+
+.status-drop{
+    @apply  w-40 text-sm text-center font-semibold text-sm rounded-3xl p-1 bg-yellow-400 focus:outline-none 
+}
+
+.modify{
+    @apply flex w-52 text-center
+}
+
+.delete{
+    @apply cursor-pointer hover:text-red-600 w-24 text-gray-600
+}
+
+.edit{
+    @apply cursor-pointer hover:text-blue-600 w-24 text-gray-600
+}
+
+.cardtext{
+    @apply p-2 
+}
+
+.strike{
+    cursor: pointer 
+    
+    }
+
+.strike:checked + span{
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}

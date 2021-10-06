@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="tailwind">
+        <meta name="viewport" content="width=device-width ,initial scale=1.0">
+        <title>TaskHandler | Task Management Tool</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../src/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    </head>
+
+    <body class="bg-gray-200 max-h-screen select-none">
+        <div class="text-center p-3 mb-5 mt-5 "> <i class="far fa-calendar-check text-red-500 text-2xl"> </i> <span class="font-bold text-2xl">TaskHandler</span> </div>
+
+        <section class="border-0 rounded-b-md bg-white max-w-6xl m-auto drop-shadow-md">
+
+            <div class="bg-gray-400 rounded-t-md"><div class="text-lg text-gray-700 fas fa-ellipsis-h pl-2"></div></div>
+
+            <div class="text-center p-3"><div class="hover:text-yellow-500 text-sm text-gray-400 far fa-star"></div> <span class="text-xl font-extrabold">Project 1.2</span> </div>
+        
+        </section>
+
+        <main class="bg-gray-300 max-w-6xl m-auto mt-2 h-screen rounded-md overflow-hidden">
+            
+            <!--Card adding section-->
+
+            <section class="mt-3 m-auto bg-white max-w-5xl shadow-lg h-full overflow-y-auto">
+
+                <div class="ml-8 mr-8"> 
+
+                    <div class="m-2 p-4 pl-0 border-b-2 flex justify-between">
+
+                        <div class="w-96">
+                            <input id="input" maxlength="90" type="text" class="border-2 rounded-sm border-blue-400 p-1 text-sm focus:outline-none font-semibold " placeholder="Enter task">
+
+                            <button id="addtask" class="border-2 rounded-sm border-blue-400 text-blue-400 text-sm font-bold p-1 focus:outline-none transition duration-200 ease-in-out transform hover:scale-105 ">Add Task</button>
+                        </div>
+
+                        <div class="p-2 w-48 text-center text-xs text-gray-400 font-semibold ">Status</div>
+
+                        <div class="p-2 w-48 text-center text-xs text-gray-400 font-semibold ">Modify</div>
+
+
+                    </div>
+
+                 <!--task cards-->
+                    
+                    <section class="font-bold m-2 p-4 pb-1 pl-0 border-b-2 border-gray-400">Tasks</section>
+                 
+                    <section id="card-display" class="">
+                         <div class="card">
+                            
+                            <div class="card-desc ">
+                                <input type="checkbox" class="strike cursor-pointer" value="1">
+                                <span class="cardtext">asdafs safasfasf asfasfasf afsafsafs</span>
+                            </div>
+                            
+                            <div class="cardstatus">
+                                <select id="status" class="status-drop">
+                                    <option class="" value="">In Review</option>
+                                    <option class="" value="">Approved</option>
+                                    <option class="" value="">In Progress</option>
+                                </select>
+                            </div>
+                            
+                            <div class="modify">
+                                <div class="delete"><div class="fas fa-trash"></div>Delete</div>
+                                
+                                <div class="edit"><div class="fas fa-edit"></div>Edit</div>
+                            </div>
+
+                        </div>   
+                    </section>
+                                
+
+                </div> 
+
+            </section>
+
+        </main>
+
+        <footer class="mt-6 max-w-6xl m-auto h-32 bg-gray-300 text-center flex justify-evenly items-center text-3xl">
+            <div class="fab fa-instagram hover:text-pink-500"></div>
+            <div class="fab fa-github hover:text-green-600"></div>
+            <div class="fab fa-facebook hover:text-blue-500"></div>
+        </footer>
+        <script src="code.js"></script>
+        <script src="../src/all.js"></script>
+    </body>
+</html>
