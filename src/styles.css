@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .card{
-    @apply flex font-semibold text-sm justify-between
+    @apply flex font-semibold text-sm justify-between h-20 mb-2
 }
 
 .card-desc{
-    @apply select-text w-96 h-16 ml-4
+    @apply select-text h-20 ml-4 w-72
 }
 
 .check-icon{
@@ -19,7 +19,7 @@
 }
 
 .status-drop{
-    @apply  w-40 text-sm text-center font-semibold text-sm rounded-3xl p-1 bg-yellow-400 focus:outline-none 
+    @apply  w-40 text-sm text-center font-semibold text-sm rounded-3xl p-1 
 }
 
 .modify{

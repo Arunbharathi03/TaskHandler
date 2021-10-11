@@ -32245,7 +32245,9 @@ video {
 }
 
 .card{
+  margin-bottom: 0.5rem;
   display: flex;
+  height: 5rem;
   justify-content: space-between;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -32254,8 +32256,8 @@ video {
 
 .card-desc{
   margin-left: 1rem;
-  height: 4rem;
-  width: 24rem;
+  height: 5rem;
+  width: 18rem;
   -webkit-user-select: text;
      -moz-user-select: text;
       -ms-user-select: text;
@@ -32283,8 +32285,6 @@ video {
 .status-drop{
   width: 10rem;
   border-radius: 1.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgba(251, 191, 36, var(--tw-bg-opacity));
   padding: 0.25rem;
   text-align: center;
   font-size: 0.875rem;
@@ -32292,11 +32292,6 @@ video {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600
-}
-
-.status-drop:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
 }
 
 .modify{

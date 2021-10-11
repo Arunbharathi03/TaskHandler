@@ -38,39 +38,66 @@
                         </div>
 
                         <div class="p-2 w-48 text-center text-xs text-gray-400 font-semibold ">Status</div>
-
+                        <div class="p-2 w-48 text-center text-xs text-gray-400 font-semibold ">Progress</div>
                         <div class="p-2 w-48 text-center text-xs text-gray-400 font-semibold ">Modify</div>
 
 
                     </div>
 
                  <!--task cards-->
+                    <section class="flex p-2 mb-2 border-b-2 border-gray-400">
+                        <div class="font-bold text-sm">Tasks</div>
+                        <div class="ml-6 font-medium text-sm text-gray-600">
+                            <input type="checkbox" id="All" class="">
+                            <label for="All">All tasks</label>
+                            <input type="checkbox" id="Completed" class="ml-4">
+                            <label for="Completed">Completed</label>
+                            <input type="checkbox" id="Incomplete" class="ml-4">
+                            <label for="Incomplete">Incompleted</label>
+                            
+                        </div>
+                    </section>
                     
-                    <section class="font-bold m-2 p-4 pb-1 pl-0 border-b-2 border-gray-400">Tasks</section>
                  
                     <section id="card-display" class="">
-                         <div class="card">
-                            
-                            <div class="card-desc ">
-                                <input type="checkbox" class="strike cursor-pointer" value="1">
-                                <span class="cardtext">asdafs safasfasf asfasfasf afsafsafs</span>
-                            </div>
-                            
-                            <div class="cardstatus">
-                                <select id="status" class="status-drop">
-                                    <option class="" value="">In Review</option>
-                                    <option class="" value="">Approved</option>
-                                    <option class="" value="">In Progress</option>
-                                </select>
-                            </div>
-                            
-                            <div class="modify">
-                                <div class="delete"><div class="fas fa-trash"></div>Delete</div>
+                        <div>
+                       <!--     <div class="card">
+                                <div class="card-desc">
+                                    <label>
+                                        <input type="checkbox" id="taskStat" class="strike cursor-pointer">
+                                        <span class="cardtext">a;smf;lmdf;lmlam ; ;lmdsag ;lkam ;ms;gms;am g; ;smd; gm,;las ;dsmga;'l ;p ;dsmg;am; gl ;dm
+                                        </span>
+                                    </label>
+                                </div>
                                 
-                                <div class="edit"><div class="fas fa-edit"></div>Edit</div>
+                                <div class="cardstatus">
+                                    <select id="status" class="status-drop ">
+                                        <option class="" value="0">Backlog</option>
+                                        <option class="" value="1">Queue</option>
+                                        <option class="" value="2">In Progress</option>
+                                        <option class="" value="3">In Review</option>
+                                        <option class="" value="4">Completed</option>
+                                    </select>
+                                </div>
+
+                                <div class="percentage w-6">
+                                    <p>21%</p>
+                                </div>
+                                
+                                <div class="modify">
+                                    <div class="delete"><div class="fas fa-trash"></div>Delete</div>
+                                    
+                                    <div class="edit"><div class="fas fa-edit"></div>Edit</div>
+                                </div>
                             </div>
 
-                        </div>   
+                            <div class="border-2 rounded-lg border-gray-400 h-4">
+                                <div class="h-3 rounded-lg bg-green-400 w-10">
+                                    
+                                </div>
+                            </div>
+
+                        </div>  -->
                     </section>
                                 
 
@@ -85,7 +112,7 @@
             <div class="fab fa-github hover:text-green-600"></div>
             <div class="fab fa-facebook hover:text-blue-500"></div>
         </footer>
-        <script src="code.js"></script>
+        <script src="app.js"></script>
         <script src="../src/all.js"></script>
     </body>
 </html>
