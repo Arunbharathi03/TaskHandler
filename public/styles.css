@@ -32285,6 +32285,8 @@ video {
 .status-drop{
   width: 10rem;
   border-radius: 1.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
   padding: 0.25rem;
   text-align: center;
   font-size: 0.875rem;
@@ -32292,6 +32294,11 @@ video {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600
+}
+
+.status-drop:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .modify{

@@ -1,30 +1,39 @@
 var board = document.getElementById('card-display')
+let taskInput = document.getElementById('input')
+let taskAddBtn = document.getElementById('addtask')
 
-let add = document.getElementById('addtask')
-add.addEventListener('click' ,function(){
+taskInput.addEventListener('keyup' , function(event) {
+    if ( event.keyCode === 13 ) {
+        event.preventDefault()
+        document.getElementById('addTask').click()
+    }
     
-    let input = document.getElementById('input').value
+})
 
-    if (input!='') {
+    let GetUserInput = () => {
+    
+    if (taskInput.value != '' ) {
 
-        addTask(input)
+        addTask(taskInput.value)
     
 
-    } else{
+    } else {
         
         alert('Enter the task')
         
     }
 
     document.getElementById('input').value = ''
-})
+}
 
+taskAddBtn.addEventListener('click' , GetUserInput )
 
 function addTask (card){
 
     var task = document.createElement('div')
     task.classList.add('card')
 
+    
     let cardInfo = document.createElement('div')
     cardInfo.classList.add('card-desc') 
     task.appendChild(cardInfo)
@@ -32,13 +41,11 @@ function addTask (card){
     let label = document.createElement('label')
     cardInfo.appendChild(label)
 
-    let checkBox = document.createElement('input')
-    checkBox.setAttribute('type' , 'checkbox')
-    checkBox.setAttribute('id' , 'taskStat')
-    checkBox.setAttribute('disabled' , true)
-    
+    var completedTaskCheck = document.createElement('input')
+    completedTaskCheck.setAttribute('type' , 'checkbox')
+    completedTaskCheck.id = 'compTask'
 
-    label.appendChild(checkBox)
+    label.appendChild(completedTaskCheck)
 
     let cardText = document.createElement('span')
     cardText.classList.add('cardtext')
@@ -58,9 +65,10 @@ function addTask (card){
     cardStatus.appendChild(statusDrop)
     
 
-    var options = ['Backlog' ,'Queue' ,'In Progress' ,'In Review' ,'Completed']
+    var options = ['- Status -', 'Backlog', 'Queue', 'In Progress', 'In Review', 'Completed']
 
     function statusSelect() {
+
         for ( var i = 0 ; i < options.length ; i++ ) {
         var opt = options[i]
         var elemt = document.createElement('option')
@@ -77,61 +85,72 @@ function addTask (card){
     var progress = document.createElement('div')
     progress.classList.add('w-6')
     task.appendChild(progress)
-    progress.innerText = '5%' 
+    progress.innerText = 0 + '%' 
 
-//function setting percentages based on drop value
 
-    statusDrop.addEventListener('click' ,function(){
-      
-    switch (statusDrop.options[statusDrop.selectedIndex].value){
-        case '0':{
-            progress.innerText = '5%'
-            checkBox.setAttribute('disabled' ,true )
-            checkBox.classList.remove('strike')
-        } 
+//function setting percentages and progress based on drop value
+    
+    statusDrop.addEventListener('click' ,function () {
+        var statusValue = statusDrop.options[statusDrop.selectedIndex]
+
+        switch (statusValue.value) {
+            case '0':
+                progress.innerText = '0%'
+                completedTaskCheck.classList.remove('strike')
+                completedTaskCheck.checked = false
+                proBar.style.width = 1 + '%'
+                proBar.style.backgroundColor = 'gray'
+
+                break;
+
+            case '1':
+                progress.innerText = '5%'
+                completedTaskCheck.classList.remove('strike')
+                completedTaskCheck.checked = false
+                proBar.style.width = 5 + '%'
+                proBar.style.backgroundColor = 'red'
             
-        break;
-
-        case '1':{ 
-            progress.innerText = '10%'
-            checkBox.setAttribute('disabled' , true)
-            checkBox.classList.remove('strike')
-        }
-
-        break;
-
-        case '2':{
-            progress.innerText = '45%'
-            checkBox.setAttribute('disabled' , true)
-            checkBox.classList.remove('strike')
-        }
-
-        break;
-
-        case '3':{
-            progress.innerText = '95%'
-            checkBox.setAttribute('disabled' , true)
-            checkBox.classList.remove('strike')
-        }
-
-        break;
-
-        case '4':{
-            progress.innerText = '100%'
-            checkBox.removeAttribute('disabled' , true)
-            checkBox.setAttribute('checked' , true)
-            checkBox.classList.add('strike')
             
+            break;
+
+            case '2': 
+                progress.innerText = '10%'
+                completedTaskCheck.classList.remove('strike')
+                completedTaskCheck.checked = false
+                proBar.style.width = 10 + '%'
+                proBar.style.backgroundColor = 'red'
+
+            break;
+
+            case '3':
+                progress.innerText = '45%'
+                completedTaskCheck.classList.remove('strike')
+                completedTaskCheck.checked = false
+                proBar.style.width = 45 + '%'
+                proBar.style.backgroundColor = 'orange'
+
+            break;
+
+            case '4':
+                progress.innerText = '95%'
+                completedTaskCheck.checked = false
+                completedTaskCheck.classList.remove('strike')
+                proBar.style.width = 95 + '%'
+                proBar.style.backgroundColor = 'blue'        
+            break;
+
+            case '5':
+                progress.innerText = '100%'
+                completedTaskCheck.checked = true
+                completedTaskCheck.classList.add('strike')
+                proBar.style.width = 100 + '%'
+                proBar.style.backgroundColor = 'green'
+            
+            default:
+            break;
         }
+        })  
         
-        
-        break;
-            
-        default:
-        break;
-    }
-    })  
-
     let modify = document.createElement('div')
     modify.classList.add('modify')
 
@@ -143,7 +162,8 @@ function addTask (card){
     modify.appendChild(remove)
 
     remove.addEventListener('click' , function(){
-        task.remove()
+        mainDiv.remove()
+
     })
 
 //for editing cards
@@ -156,12 +176,13 @@ function addTask (card){
 
     edit.addEventListener('click' , editFn)
     function editFn(){
-        let editedTxt = prompt('Enter text to Edit Card!!')
-        if(editedTxt == null || editedTxt == ''){
-            cardText.innerText = card
-        }else{
-        cardText.innerText = editedTxt
-        }
+
+        let currentTitle = cardText.innerText
+        let newTitle = prompt('Enter to edit task title - ' + currentTitle)
+
+        if (newTitle === null || newTitle === '' || newTitle.trim() == "" ) cardText.innerText = currentTitle 
+        else cardText.innerText = newTitle
+        
     }
 
     //for progress bar
@@ -169,7 +190,8 @@ function addTask (card){
     bar.classList.add('border-2' ,'rounded-lg' ,'border-gray-400' ,'h-4')   
     
     let proBar = document.createElement('div')
-    proBar.classList.add('h-3' ,'rounded-lg' ,'bg-green-400' ,'w-10')
+    proBar.classList.add('h-3' ,'rounded-lg', 'bg-gray-300')
+    proBar.style.width = 1 + '%'
     bar.appendChild(proBar)
 
     let mainDiv = document.createElement('div')
@@ -177,56 +199,85 @@ function addTask (card){
     mainDiv.appendChild(task)
     mainDiv.appendChild(bar)
 
-    statusDrop.addEventListener('click' ,function(){
-    switch (statusDrop.options[statusDrop.selectedIndex].value) {
-        case '0': proBar.classList.add('w-10')
-            
-            break;
-        
-        case '1': proBar.classList.add('w-32')
-            
-            break;
-
-        case '2': proBar.classList.add('w-96')
-            
-            break;
-
-        case '3': proBar.classList.add('')
-            
-            break;
-
-        case '4': proBar.classList.add('w-full')
-            
-            break;    
-        
-        default:
-
-            break;
-    }
-    })
-
     board.prepend(mainDiv)
-    
 
+    //to set status when card is checked completed
+    completedTaskCheck.addEventListener('click', function () {
+
+        if ( completedTaskCheck.checked === true ) {
+            progress.innerText = 100 + '%'
+            proBar.style.width = 100 + '%'
+            proBar.style.backgroundColor = 'green'
+            completedTaskCheck.classList.add('strike')
+            statusDrop.value = '5'
+            
+            }
+        else if( completedTaskCheck.checked === false ) {
+            progress.innerText = 45 + '%'
+            proBar.style.width = 45 + '%'
+            proBar.style.backgroundColor = 'orange'
+            statusDrop.value = '3'
+
+        }
+    })
+    
+    let completed = document.getElementById('Completed')
+    let incompleted = document.getElementById('Incomplete')
+    let allTasks = document.getElementById('All')
+    allTasks.checked = true
+    allTasks.addEventListener('click', function(){
+    
+    
+        if (allTasks.checked == true){
+            incompleted.checked = false
+            completed.checked = false
+            mainDiv.hidden = false
+        
+            
+        } 
+        
+    }  ) 
+
+    completed.addEventListener('click', function(){
+    
+    
+        if (completed.checked == true){
+            mainDiv.hidden = false
+            incompleted.checked = false
+            allTasks.checked = false
+            if(statusDrop.value !== '5'){
+                mainDiv.hidden = true
+            }
+            
+        } else {
+            mainDiv.hidden = false
+            allTasks.checked = true
+            }
+        
+    }  )
+    
+    
+    incompleted.addEventListener('click', function(){
+        
+        if (incompleted.checked == true){
+            mainDiv.hidden = false
+            completed.checked = false
+            allTasks.checked = false
+            if(statusDrop.value === '5'){
+                mainDiv.hidden = true
+            }
+            
+        } else {
+            mainDiv.hidden = false
+            allTasks.checked = true
+            }
+        
+    }  ) 
 }
 
 //addTask function ends here
 
 
-let completed = document.getElementById('Completed')
-
-completed.addEventListener('click', function(){
-
-
-    if (completed.checked == true){
-        if (completed.checked == true){
-            console.log('ads')
-        }
-    }else if(completed.checked == false){
-            console.log('red')
-        }
-    
-}) 
 
 
 
