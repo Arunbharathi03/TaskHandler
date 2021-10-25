@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .card{
-    @apply flex font-semibold text-sm justify-between h-20 mb-2
+    @apply flex font-semibold text-sm justify-between h-20 mb-2 
 }
 
 .card-desc{

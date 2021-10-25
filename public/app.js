@@ -2,28 +2,12 @@ var board = document.getElementById('card-display')
 let taskInput = document.getElementById('input')
 let taskAddBtn = document.getElementById('addtask')
 
-taskInput.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        event.preventDefault()
-        taskAddBtn.click()
-    }
-})
+let taskInput2 = document.getElementById('input2')
+let taskAddBtn2 = document.getElementById('addtask2')
 
-// camel case -> getUserInput
-// kebab case -> get-user-input
-// snake case -> get_user_input
-
-let GetUserInput = () => {
-    if (taskInput.value != '') {
-        addTask(taskInput.value)
-    } else {
-        alert('Enter the task')
-    }
-    document.getElementById('input').value = ''
-}
-taskAddBtn.addEventListener('click', GetUserInput)
 
 function addTask (card) {
+
     var task = document.createElement('div')
     task.classList.add('card')
 
@@ -56,7 +40,7 @@ function addTask (card) {
     statusDrop.classList.add('status-drop')
     cardStatus.appendChild(statusDrop)
 
-    var options = ['- Status -', 'Backlog', 'Queue', 'In Progress', 'In Review', 'Completed']
+    var options = ['Backlog', 'Queue', 'In Progress', 'In Review', 'Completed']
 
     function statusSelect () {
         for (var i = 0; i < options.length; i++) {
@@ -80,43 +64,36 @@ function addTask (card) {
     statusDrop.addEventListener('click', function () {
         var statusValue = statusDrop.options[statusDrop.selectedIndex]
         switch (statusValue.value) {
-            case '0': {
-                progress.innerText = '0%'
-                completedTaskCheck.classList.remove('strike')
-                completedTaskCheck.checked = false
-                proBar.style.width = 1 + '%'
-                proBar.style.backgroundColor = 'gray'
-                break
-            }
-            case '1':
+    
+            case '0':
                 progress.innerText = '5%'
                 completedTaskCheck.classList.remove('strike')
                 completedTaskCheck.checked = false
                 proBar.style.width = 5 + '%'
                 proBar.style.backgroundColor = 'red'
                 break
-            case '2':
+            case '1':
                 progress.innerText = '10%'
                 completedTaskCheck.classList.remove('strike')
                 completedTaskCheck.checked = false
                 proBar.style.width = 10 + '%'
                 proBar.style.backgroundColor = 'red'
                 break
-            case '3':
+            case '2':
                 progress.innerText = '45%'
                 completedTaskCheck.classList.remove('strike')
                 completedTaskCheck.checked = false
                 proBar.style.width = 45 + '%'
                 proBar.style.backgroundColor = 'orange'
                 break
-            case '4':
+            case '3':
                 progress.innerText = '95%'
                 completedTaskCheck.checked = false
                 completedTaskCheck.classList.remove('strike')
                 proBar.style.width = 95 + '%'
                 proBar.style.backgroundColor = 'blue'
                 break
-            case '5':
+            case '4':
                 progress.innerText = '100%'
                 completedTaskCheck.checked = true
                 completedTaskCheck.classList.add('strike')
@@ -147,7 +124,7 @@ function addTask (card) {
     edit.addEventListener('click', editFn)
     function editFn () {
         let currentTitle = cardText.innerText
-        let newTitle = prompt('Enter to edit task title - ' + currentTitle)
+        let newTitle = prompt('Edit task title !!!' ,  currentTitle )
 
         if (newTitle === null || newTitle === '' || newTitle.trim() == "") cardText.innerText = currentTitle
         else cardText.innerText = newTitle
@@ -155,81 +132,149 @@ function addTask (card) {
 
     //for progress bar
     let bar = document.createElement('div')
-    bar.classList.add('border-2', 'rounded-lg', 'border-gray-400', 'h-4')
+    bar.classList.add('border-2', 'rounded-lg', 'border-gray-400', 'h-4', 'w-64')
 
     let proBar = document.createElement('div')
-    proBar.classList.add('h-3', 'rounded-lg', 'bg-gray-300')
-    proBar.style.width = 1 + '%'
+    proBar.classList.add('h-3', 'rounded-lg')
+    proBar.style.backgroundColor = 'red'
+    proBar.style.width = 5 + '%'
     bar.appendChild(proBar)
 
     let mainDiv = document.createElement('div')
-    mainDiv.classList.add('mb-7')
+    mainDiv.classList.add('bg-gray-200', 'p-4', 'rounded-lg', 'shadow-md' , 'mt-3')
     mainDiv.appendChild(task)
     mainDiv.appendChild(bar)
 
     board.prepend(mainDiv)
-
     //to set status when card is checked completed
+
     completedTaskCheck.addEventListener('click', function () {
         if (completedTaskCheck.checked === true) {
             progress.innerText = 100 + '%'
             proBar.style.width = 100 + '%'
             proBar.style.backgroundColor = 'green'
             completedTaskCheck.classList.add('strike')
-            statusDrop.value = '5'
+            statusDrop.value = '4'
         } else if (completedTaskCheck.checked === false) {
             progress.innerText = 45 + '%'
             proBar.style.width = 45 + '%'
             proBar.style.backgroundColor = 'orange'
-            statusDrop.value = '3'
+            statusDrop.value = '2'
         }
     })
 
     let completed = document.getElementById('Completed')
     let incompleted = document.getElementById('Incomplete')
     let allTasks = document.getElementById('All')
-    allTasks.checked = true
+
     allTasks.addEventListener('click', function () {
-        if (allTasks.checked == true) {
-            incompleted.checked = false
-            completed.checked = false
+        if ( allTasks.checked == true ) {
             mainDiv.hidden = false
+            completed.checked = true
+            incompleted.checked = true
+        } else {
+            completed.checked = false
+            incompleted.checked = false
         }
-    })
+
+        if ( allTasks.checked == false && completed.checked == true ) {
+            if (statusDrop.value !== '4') mainDiv.hidden = true
+                else {
+                    mainDiv.hidden = false
+                }
+            }
+
+        if ( allTasks.checked == false && incompleted.checked == true ) {
+            if (statusDrop.value == '4') mainDiv.hidden = true
+                else {
+                    mainDiv.hidden = false
+                }
+            }
+
+    })      
 
     completed.addEventListener('click', function () {
-        if (completed.checked == true) {
-            mainDiv.hidden = false
-            incompleted.checked = false
-            allTasks.checked = false
-            if (statusDrop.value !== '5') mainDiv.hidden = true
+        
+        if (completed.checked == true ) {
+            if (statusDrop.value !== '4') mainDiv.hidden = true
         } else {
             mainDiv.hidden = false
-            allTasks.checked = true
         }
+
+        if (completed.checked == false && incompleted.checked == true){
+            allTasks.checked = false
+            if (statusDrop.value == '4') mainDiv.hidden = true
+            
+        }
+
+        if ( incompleted.checked == true && completed.checked == true ) {
+                mainDiv.hidden = false
+                allTasks.checked = true
+            }
+            
     })
 
 
     incompleted.addEventListener('click', function () {
-        if (incompleted.checked == true) {
+        
+
+        if ( incompleted.checked == true ) {
             mainDiv.hidden = false
-            completed.checked = false
-            allTasks.checked = false
-            if (statusDrop.value === '5') mainDiv.hidden = true
+            if ( statusDrop.value === '4' ) mainDiv.hidden = true
         } else {
+            mainDiv.hidden = false
+        }
+
+        if ( incompleted.checked == true && completed.checked == true ) {
             mainDiv.hidden = false
             allTasks.checked = true
         }
+
+        if (completed.checked == true && incompleted.checked == false){
+            allTasks.checked = false
+            if (statusDrop.value !== '4') mainDiv.hidden = true
+        }
     })
+    return {board, mainDiv}
+    
 }
 
 //addTask function ends here
+taskInput.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault()
+        taskAddBtn.click()
+    }
+})
+
+let getUserInput = () => {
+    if (taskInput.value != '') addTask (taskInput.value)
+    else alert('Enter the task')
+
+    document.getElementById('input').value = ''
+    document.getElementById('input').focus()
+}
 
 
 
+taskInput2.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault()
+        taskAddBtn2.click()
+    }
+})
+
+   let getUserInput2 = () => {
+    if (taskInput2.value != '') addTask (taskInput2.value)
+    else alert('Enter the task')
+
+    document.getElementById('input2').value = ''
+    document.getElementById('input2').focus()
+}
 
 
-
+taskAddBtn2.addEventListener('click', getUserInput2)
+taskAddBtn.addEventListener('click', getUserInput)
 
 
 
